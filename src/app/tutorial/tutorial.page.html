@@ -1,5 +1,15 @@
+<ion-header  no-border>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button color="primary"  (click)="startApp()" color="primary">
+        Skip
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content no-bounce>
+
+<ion-content no-bounce padding>
   <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
 
     <ion-slide>
