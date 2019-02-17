@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController, Slides } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, MenuController, Slides } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tutorial',
@@ -7,10 +8,40 @@ import { IonicPage, NavController, NavParams,MenuController, Slides } from '@ion
   styleUrls: ['./tutorial.page.scss'],
 })
 export class TutorialPage implements OnInit {
-
-  constructor() { }
+  showSkip = true;
+   @ViewChild('slides') slides: Slides;
+  constructor(
+    public navCtrl: NavController,
+    public menu: MenuController,
+    public storage: Storage
+  ) {
+  }
 
   ngOnInit() {
+  }
+
+  startApp() {
+    this.storage.get('hasLoggedIn')
+      .then((hasLoggedIn) => {
+        this.navCtrl.setRoot(hasLoggedIn ? "HomePage" : "LoginPage").then(() => {
+          this.storage.set('hasSeenTutorial', 'true');
+        })
+      });
+
+
+  }
+  onSlideChangeStart(slider: Slides) {
+      console.log(slider)
+      this.showSkip = !slider.isEnd();
+  }
+  startApp() {
+    this.storage.get('hasLoggedIn')
+      .then((hasLoggedIn) => {
+
+        this.navCtrl.navigateRoot(hasLoggedIn ? "/home" : "/login").then(() => {
+          this.storage.set('hasSeenTutorial', 'true');
+        })
+      });
   }
 
 }
