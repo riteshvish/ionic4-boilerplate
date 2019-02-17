@@ -20,8 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    IonicStorageModule.forRoot()
+    RouterModule.forChild(routes)
 
   ],
   providers:[
